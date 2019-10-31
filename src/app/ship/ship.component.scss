@@ -1,0 +1,30 @@
+.search-warpper {
+  .search-input {
+    position: absolute;
+    right: 20px;
+  }
+  button {
+    &.search-button {
+      position: absolute;
+      right: 20px;
+    }
+  }
+}
+.table {
+  margin: 5% 0;
+  table, .pagination {
+    width: 90%;
+    margin: 0 auto;
+    .busket-button {
+      position: absolute;
+      right: 0px;
+      top: 5px;
+    }
+    td {
+      position: relative;
+    }
+  }
+  .pagination {
+    margin-top: 20px;
+  }
+}

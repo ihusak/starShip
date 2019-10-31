@@ -1,0 +1,55 @@
+<div class="search-warpper">
+  <mat-toolbar>
+    <span>StartShips</span>
+    <div class="search-input" *ngIf="toggleSearchInput">
+    <mat-form-field class="example-full-width">
+      <input placeholder="Search" matInput (keyup)="filterModel($event.target.value)">
+    </mat-form-field>
+    <button mat-button (click)="toggleSearchInput = !toggleSearchInput">
+        <mat-icon (click)="closeFilter()" aria-hidden="false" aria-label="close">close</mat-icon>
+    </button>
+    </div>
+    <button class="search-button" *ngIf="!toggleSearchInput" mat-button (click)="toggleSearchInput = !toggleSearchInput">
+      <mat-icon aria-hidden="false" aria-label="search">search</mat-icon>
+      SEARCH
+    </button>
+  </mat-toolbar>
+</div>
+<div class="table">
+    <table mat-table [dataSource]="ships" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Manufacturer">
+          <th mat-header-cell *matHeaderCellDef> Manufacturer </th>
+          <td mat-cell *matCellDef="let element"> {{element.manufacturer}} </td>
+        </ng-container>
+        <ng-container matColumnDef="crew">
+          <th mat-header-cell *matHeaderCellDef> crew </th>
+          <td mat-cell *matCellDef="let element"> {{element.crew}} </td>
+        </ng-container>
+        <ng-container matColumnDef="class">
+          <th mat-header-cell *matHeaderCellDef> class </th>
+          <td mat-cell *matCellDef="let element"> {{element.starship_class}}
+            <button class="busket-button" matTooltip="Add to busket" mat-button (click)="addToBusket(element)">
+              <mat-icon aria-hidden="false" aria-label="search">add</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="heders"></tr>
+        <tr mat-row *matRowDef="let row; columns: heders;"></tr>
+      </table>
+      <div class="pagination">
+          <mat-paginator 
+            [length]="fullCount"
+            [pageSize]="10"
+            [pageIndex]="initialPage"
+            (page)="switchPages($event)"
+            >
+          </mat-paginator>
+      </div>
+</div>
+<app-busket></app-busket>
